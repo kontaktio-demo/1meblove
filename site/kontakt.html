@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0F0E0D">
+  <meta name="description" content="Meblove — studio projektowe z Łodzi. Projektujemy i wykonujemy meble na wymiar z naturalnego drewna.">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,7 +17,7 @@
   <!-- ── Navigation ──────────────────────────── -->
   <nav class="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">Meblove</a>
+      <a href="index.html" class="nav__logo" aria-label="Meblove.com.pl — Strona główna"><img src="assets/logo.svg" alt="Meblove.com.pl" class="nav__logo-img"><span class="nav__logo-text">Meblove</span></a>
       <ul class="nav__links">
         <li><a href="nasze-meble.html" class="nav__link" data-page="nasze-meble.html">Nasze meble</a></li>
         <li><a href="realizacje.html"  class="nav__link" data-page="realizacje.html">Realizacje</a></li>
@@ -70,10 +73,10 @@
           <div class="contact-detail fade-up">
             <span class="contact-detail__label">Adres pracowni</span>
             <p class="contact-detail__value">
-              ul. Rzemieślnicza 12<br>
-              01-234 Warszawa (Wola)<br>
+              ul. Piotrkowska 137<br>
+              91-463 Łódź (Śródmieście)<br>
               <span style="font-size:var(--f-sm);color:var(--subtle);margin-top:4px;display:block;">
-                wejście od podwórza
+                wejście od strony ul. Piotrkowskiej
               </span>
             </p>
           </div>
@@ -193,13 +196,13 @@
 
           <div class="accordion__item">
             <button class="accordion__trigger">
-              <span>Czy robicie projekty poza Warszawą?</span>
+              <span>Czy robicie projekty poza Łodzią?</span>
               <span class="accordion__icon"></span>
             </button>
             <div class="accordion__body">
               <div class="accordion__content">
                 <div class="accordion__inner">
-                  Głównie pracujemy na terenie Warszawy i okolic (do ok. 50 km).
+                  Głównie pracujemy na terenie Łodzi i okolic (do ok. 50 km).
                   W przypadku większych projektów możemy dojechać dalej —
                   napisz, zapytamy o szczegóły.
                 </div>
@@ -265,8 +268,8 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__brand">Meblove</p>
-          <p class="footer__tagline">Mała pracownia stolarska w Warszawie. Meble na zamówienie z naturalnego drewna.</p>
+          <p class="footer__brand"><img src="assets/logo.svg" alt="Meblove.com.pl" class="footer__logo-img"></p>
+          <p class="footer__tagline">Studio projektowe z Łodzi. Projektujemy i wykonujemy meble na wymiar — z naturalnego drewna, z dbałością o detal.</p>
         </div>
         <div>
           <p class="footer__heading">Strony</p>
@@ -289,15 +292,20 @@
         <div>
           <p class="footer__heading">Kontakt</p>
           <ul class="footer__links">
-            <li><span class="footer__link" style="line-height:1.6;">ul. Rzemieślnicza 12<br>01-234 Warszawa</span></li>
+            <li><span class="footer__link" style="line-height:1.6;">ul. Piotrkowska 137<br>91-463 Łódź</span></li>
             <li><a href="tel:+48501234567"          class="footer__link">+48 501 234 567</a></li>
             <li><a href="mailto:kontakt@meblove.pl"  class="footer__link">kontakt@meblove.pl</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2025 Meblove. Pracownia stolarska Warszawa.</span>
-        <span>Polityka prywatności</span>
+        <span>© 2025 Meblove — Meble na wymiar · Łódź</span>
+        <nav class="footer__legal" aria-label="Informacje prawne">
+          <a href="polityka-prywatnosci.html" class="footer__link">Polityka prywatności</a>
+          <a href="regulamin.html" class="footer__link">Regulamin</a>
+          <button type="button" class="footer__link" onclick="window.mebloveOpenCookieSettings && window.mebloveOpenCookieSettings()">Ustawienia cookies</button>
+        </nav>
+        <span class="footer__credit">Strona stworzona przez <a href="https://kontaktio.pl" target="_blank" rel="noopener">kontaktio.pl</a></span>
       </div>
     </div>
   </footer>
