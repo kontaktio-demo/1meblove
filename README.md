@@ -4,7 +4,6 @@ Statyczna strona wizerunkowa małej, rodzinnej pracowni **Meblove** z Łodzi.
 Bez frameworków, bez bundlera — czysty HTML, CSS i JavaScript.
 
 ```
-site/
 ├── index.html                  — strona główna (hero + liczby + realizacje)
 ├── nasze-meble.html            — katalog mebli z filtrami i materiałami
 ├── realizacje.html             — portfolio
@@ -22,11 +21,10 @@ site/
 
 ## Uruchomienie lokalnie
 
-Strona jest w pełni statyczna — wystarczy otworzyć `site/index.html`
+Strona jest w pełni statyczna — wystarczy otworzyć `index.html`
 w przeglądarce lub wystawić lokalny serwer:
 
 ```bash
-cd site
 python3 -m http.server 5173   # albo: npx serve .
 ```
 
@@ -39,21 +37,20 @@ Otwórz <http://localhost:5173>.
 2. Zaimportuj to repozytorium.
 3. W kroku *Configure Project*:
    - **Framework Preset:** `Other`
-   - **Root Directory:** `site`
+   - **Root Directory:** `.` *(katalog główny repozytorium)*
    - **Build Command:** *(pozostaw puste)*
-   - **Output Directory:** *(pozostaw puste — Vercel wystawi zawartość `site/`)*
+   - **Output Directory:** *(pozostaw puste)*
 4. Kliknij **Deploy**. Gotowe — po chwili zobaczysz publiczny URL.
 
 ### Opcja B — z linii poleceń
 
 ```bash
 npm i -g vercel
-cd site
 vercel           # pierwsza konfiguracja (link / create)
 vercel --prod    # wdrożenie produkcyjne
 ```
 
-`vercel.json` w katalogu `site/` konfiguruje nagłówki bezpieczeństwa i cache — Vercel odczyta go automatycznie.
+`vercel.json` w katalogu głównym repozytorium konfiguruje nagłówki bezpieczeństwa i cache — Vercel odczyta go automatycznie.
 
 ## Co zawiera strona
 
