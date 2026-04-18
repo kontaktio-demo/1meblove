@@ -345,11 +345,7 @@
           btns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           const filter = (btn.dataset.filter || btn.textContent.trim().toLowerCase()).toLowerCase();
-          const scope = group.closest('section') || document;
-          const cards = scope.parentElement ? scope.parentElement.querySelectorAll('[data-cat]') : document.querySelectorAll('[data-cat]');
-          // Fallback: query in document for items with data-cat
-          const items = document.querySelectorAll('[data-cat]');
-          items.forEach(item => {
+          document.querySelectorAll('[data-cat]').forEach(item => {
             const cats = (item.dataset.cat || '').toLowerCase();
             const show = filter === 'wszystko' || cats.split(/\s+/).includes(filter);
             item.style.display = show ? '' : 'none';
