@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nasze meble — Meblove</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────── -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Meblove</a>
+      <ul class="nav__links">
+        <li><a href="nasze-meble.html" class="nav__link" data-page="nasze-meble.html">Nasze meble</a></li>
+        <li><a href="realizacje.html"  class="nav__link" data-page="realizacje.html">Realizacje</a></li>
+        <li><a href="o-nas.html"       class="nav__link" data-page="o-nas.html">O nas</a></li>
+        <li><a href="kontakt.html"     class="nav__link" data-page="kontakt.html">Kontakt</a></li>
+        <li><a href="kontakt.html"     class="btn nav__cta">Napisz do nas</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__drawer">
+    <a href="nasze-meble.html" class="nav__link">Nasze meble</a>
+    <a href="realizacje.html"  class="nav__link">Realizacje</a>
+    <a href="o-nas.html"       class="nav__link">O nas</a>
+    <a href="kontakt.html"     class="nav__link">Kontakt</a>
+    <a href="kontakt.html"     class="btn btn-primary" style="margin-top:1rem">Napisz do nas</a>
+  </div>
+
+  <main>
+
+    <!-- ── Page header ───────────────────────── -->
+    <div class="page-header">
+      <div class="container">
+        <p class="page-header__eyebrow">Co robimy</p>
+        <h1 class="page-header__title">Nasze meble</h1>
+        <p class="page-header__sub">
+          Wszystko wykonujemy na zamówienie — dopasowane do wymiarów,
+          wnętrza i preferencji. Nic z magazynu.
+        </p>
+      </div>
+    </div>
+    <hr class="divider" />
+
+    <!-- ── Filters ───────────────────────────── -->
+    <section style="padding-block:var(--s-8);background:var(--canvas);position:sticky;top:var(--nav-h);z-index:10;border-bottom:1px solid var(--border);">
+      <div class="container">
+        <div class="filters" style="margin:0;">
+          <button class="filter-btn active" data-filter="wszystko">Wszystko</button>
+          <button class="filter-btn" data-filter="salon">Salon</button>
+          <button class="filter-btn" data-filter="sypialnia">Sypialnia</button>
+          <button class="filter-btn" data-filter="jadalnia">Kuchnia & jadalnia</button>
+          <button class="filter-btn" data-filter="szafy">Szafy & zabudowy</button>
+          <button class="filter-btn" data-filter="gabinet">Gabinet & biuro</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Items grid ─────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6);">
+
+          <!-- Salon -->
+          <article class="card fade-up" data-cat="salon">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#D4C4A8,#B0A088);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Salon</span>
+              <h2 class="card__title">Sofa tapicerowana</h2>
+              <p class="card__desc">
+                Rama z drewna litego, sprężyny kieszeniowe, tapicerka do
+                wyboru z naszych próbników. Wymiary ustalamy razem.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fade-up" data-cat="salon">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#C8925C,#8C6030);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Salon</span>
+              <h2 class="card__title">Stolik kawowy z drewna</h2>
+              <p class="card__desc">
+                Blat z litego dębu lub orzecha, nogi według projektu.
+                Możliwe łączenie z metalem lub marmurem.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fade-up" data-cat="salon">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#6B4226,#2E1408);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Salon</span>
+              <h2 class="card__title">Fotel tapicerowany</h2>
+              <p class="card__desc">
+                Lity orzech lub dąb, tapicerka z naturalnych tkanin.
+                Klasyczna lub nowoczesna forma.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sypialnia -->
+          <article class="card fade-up" data-cat="sypialnia">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#D8CCBE,#A89E90);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Sypialnia</span>
+              <h2 class="card__title">Łóżko z drewna litego</h2>
+              <p class="card__desc">
+                Ramy z dębu, orzecha lub jesionu. Z zagłówkiem tapicerowanym
+                lub drewnianym. Rozmiar od 80 do 200 cm szerokości.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fade-up" data-cat="sypialnia szafy">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#E8E3DC,#CCC6BC);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Sypialnia</span>
+              <h2 class="card__title">Szafa do sypialni</h2>
+              <p class="card__desc">
+                Szafy przesuwne lub uchylne, dopasowane do skosów
+                i niestandardowych wymiarów pokoju.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fade-up" data-cat="sypialnia">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#B8A890,#907860);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Sypialnia</span>
+              <h2 class="card__title">Komoda i szafki nocne</h2>
+              <p class="card__desc">
+                Komplet do sypialni projektowany razem — jednolity styl,
+                dopasowane wymiary i materiały.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Jadalnia -->
+          <article class="card fade-up" data-cat="jadalnia">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#C8925C,#A06B3A);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Kuchnia & jadalnia</span>
+              <h2 class="card__title">Stół jadalniany</h2>
+              <p class="card__desc">
+                Lite drewno dębowe lub orzechowe. Stałe lub rozkładane
+                do 400 cm. Nogi do wyboru — drewno lub metal.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fade-up" data-cat="jadalnia">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#E0D8CC,#C0B8A8);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Kuchnia & jadalnia</span>
+              <h2 class="card__title">Krzesła i ławy</h2>
+              <p class="card__desc">
+                Projektowane razem ze stołem lub jako uzupełnienie.
+                Drewno + tapicerka lub w całości drewno.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Szafy & zabudowy -->
+          <article class="card fade-up" data-cat="szafy">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#1A1714,#3A3330);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Zabudowy</span>
+              <h2 class="card__title">Zabudowa ściany w salonie</h2>
+              <p class="card__desc">
+                Półki, szafki, miejsce na TV — zabudowa od podłogi
+                do sufitu, dopasowana do każdej ściany.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Gabinet -->
+          <article class="card fade-up" data-cat="gabinet">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#C4A882,#8C7858);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Gabinet & biuro</span>
+              <h2 class="card__title">Biurko na wymiar</h2>
+              <p class="card__desc">
+                Biurka do pracy z domu i gabinetów — z litego drewna,
+                z miejscem na kable, z szufladami lub bez.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fade-up" data-cat="gabinet szafy">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#A09070,#786850);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Gabinet & biuro</span>
+              <h2 class="card__title">Regały i biblioteczki</h2>
+              <p class="card__desc">
+                Wolnostojące lub zabudowane, z regulowanymi półkami.
+                Z litego drewna lub płyty oklejonej fornirem.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Zapytaj o wycenę <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Inne -->
+          <article class="card fade-up" data-cat="inne">
+            <div class="card__img">
+              <div class="placeholder-img" style="background:linear-gradient(135deg,#D0C8B8,#A8A090);"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Inne</span>
+              <h2 class="card__title">Coś innego?</h2>
+              <p class="card__desc">
+                Masz pomysł na mebel, który tu nie pasuje? Napisz —
+                rozmawiamy o każdym projekcie indywidualnie.
+              </p>
+              <div class="card__price" style="border-top:1px solid var(--border);padding-top:var(--s-4);">
+                <a href="kontakt.html" class="btn btn-ghost" style="font-size:.75rem;padding:0;">
+                  Porozmawiajmy <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Materiały ───────────────────────────── -->
+    <section class="section section--surface">
+      <div class="container">
+        <p class="section__eyebrow fade-up">Materiały</p>
+        <h2 class="section__title fade-up" style="margin-bottom:var(--s-10);">
+          Z czego to robimy
+        </h2>
+        <div class="materials-track">
+          <div class="material-card">
+            <div class="material-card__swatch swatch-walnut placeholder-img"></div>
+            <p class="material-card__name">Orzech amerykański</p>
+            <p class="material-card__desc">Ciemne usłojenie, szlachetny wygląd. Olejowany ręcznie.</p>
+          </div>
+          <div class="material-card">
+            <div class="material-card__swatch swatch-oak placeholder-img"></div>
+            <p class="material-card__name">Dąb europejski</p>
+            <p class="material-card__desc">Jasny i wyrazisty. Klasyka polskiego stolarstwa.</p>
+          </div>
+          <div class="material-card">
+            <div class="material-card__swatch swatch-ash placeholder-img"></div>
+            <p class="material-card__name">Jesion</p>
+            <p class="material-card__desc">Delikatne usłojenie, jasny odcień — minimalistyczne wnętrza.</p>
+          </div>
+          <div class="material-card">
+            <div class="material-card__swatch swatch-marble placeholder-img"></div>
+            <p class="material-card__name">Marmur</p>
+            <p class="material-card__desc">Do blatów, stolików i detali. Każda płyta jest inna.</p>
+          </div>
+          <div class="material-card">
+            <div class="material-card__swatch swatch-linen placeholder-img"></div>
+            <p class="material-card__name">Tkaniny naturalne</p>
+            <p class="material-card__desc">Len, bouclé, wełna — importowane z atestem OEKO-TEX®.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────── -->
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-banner__inner">
+          <h2 class="cta-banner__title fade-up">
+            Wiesz czego szukasz? Napisz do nas.
+          </h2>
+          <a href="kontakt.html" class="btn fade-up"
+             style="background:var(--canvas);color:var(--ink);flex-shrink:0;">
+            Bezpłatna wycena
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__brand">Meblove</p>
+          <p class="footer__tagline">Mała pracownia stolarska w Warszawie. Meble na zamówienie z naturalnego drewna.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Strony</p>
+          <ul class="footer__links">
+            <li><a href="nasze-meble.html" class="footer__link">Nasze meble</a></li>
+            <li><a href="realizacje.html"  class="footer__link">Realizacje</a></li>
+            <li><a href="o-nas.html"       class="footer__link">O nas</a></li>
+            <li><a href="kontakt.html"     class="footer__link">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Co robimy</p>
+          <ul class="footer__links">
+            <li><a href="nasze-meble.html" class="footer__link">Meble do salonu</a></li>
+            <li><a href="nasze-meble.html" class="footer__link">Meble do sypialni</a></li>
+            <li><a href="nasze-meble.html" class="footer__link">Stoły i krzesła</a></li>
+            <li><a href="nasze-meble.html" class="footer__link">Szafy na wymiar</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Kontakt</p>
+          <ul class="footer__links">
+            <li><span class="footer__link" style="line-height:1.6;">ul. Rzemieślnicza 12<br>01-234 Warszawa</span></li>
+            <li><a href="tel:+48501234567"         class="footer__link">+48 501 234 567</a></li>
+            <li><a href="mailto:kontakt@meblove.pl" class="footer__link">kontakt@meblove.pl</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 Meblove. Pracownia stolarska Warszawa.</span>
+        <span>Polityka prywatności</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
