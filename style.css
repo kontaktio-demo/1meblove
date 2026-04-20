@@ -344,10 +344,13 @@ p { color: var(--ink); }
   position: fixed;
   inset: var(--nav-h) 0 0 0;
   background: var(--bg);
-  padding: 28px 24px calc(28px + env(safe-area-inset-bottom, 0px));
+  background-image:
+    radial-gradient(120% 80% at 100% 0%, var(--bg-warm) 0%, transparent 55%),
+    radial-gradient(120% 80% at 0% 100%, var(--beige-soft) 0%, transparent 60%);
+  padding: 24px 20px calc(32px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
   z-index: 49;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -355,9 +358,32 @@ p { color: var(--ink); }
   visibility: hidden;
   transform: translateY(-8px);
   transition: opacity var(--t), transform var(--t), visibility 0s linear var(--t);
+  border-top: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-md);
 }
-.nav__drawer .nav__link { padding: 14px 16px; font-size: 1.15rem; color: var(--ink); }
-.nav__drawer .btn { margin-top: 16px; align-self: flex-start; }
+.nav__drawer .nav__link {
+  display: block;
+  padding: 18px 12px;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  border-radius: 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.nav__drawer .nav__link:last-of-type { border-bottom: none; }
+.nav__drawer .nav__link:hover,
+.nav__drawer .nav__link:active { background: rgba(14,14,13,0.04); }
+.nav__drawer .nav__link.is-active { color: var(--ink); }
+.nav__drawer .nav__link.is-active::after { display: none; }
+.nav__drawer .btn {
+  margin-top: 24px;
+  align-self: stretch;
+  text-align: center;
+  padding: 16px 22px;
+  font-size: 0.95rem;
+}
 .nav.is-open .nav__drawer {
   opacity: 1;
   visibility: visible;
@@ -365,9 +391,10 @@ p { color: var(--ink); }
   transition: opacity var(--t), transform var(--t), visibility 0s;
 }
 .nav.is-open {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
   background: rgba(244,241,236,0.94);
+  border-bottom-color: var(--line-soft);
 }
 .has-hero .nav:not(.is-scrolled).is-open {
   background: rgba(244,241,236,0.94);
@@ -384,6 +411,19 @@ p { color: var(--ink); }
   .nav__links { display: none; }
   .nav__burger { display: block; }
   .nav__inner { gap: 12px; }
+
+  /* Always keep a visible, fitting backdrop on the mobile bar so the burger
+     never floats over the hero with no contrast. */
+  .nav,
+  .has-hero .nav:not(.is-scrolled) {
+    background: rgba(244,241,236,0.85);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .has-hero .nav:not(.is-scrolled) .nav__logo-mark,
+  .has-hero .nav:not(.is-scrolled) .nav__logo-dot { color: var(--ink); }
+  .has-hero .nav:not(.is-scrolled) .nav__burger span { background: var(--ink); }
 }
 
 .hero {
