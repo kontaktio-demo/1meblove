@@ -74,5 +74,175 @@ document.documentElement.classList.add('js');
   // ---- Footer year ----
   const yr = document.getElementById('year');
   if (yr) yr.textContent = String(new Date().getFullYear());
+
+  // ---- Cookie consent ----
+  const CONSENT_KEY = 'meblove_cookie_consent_v1';
+  const DEFAULTS = { necessary: true, analytics: false, marketing: false };
+
+  const readConsent = () => {
+    try {
+      const raw = localStorage.getItem(CONSENT_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      return { ...DEFAULTS, ...(parsed.prefs || {}) };
+    } catch (_) { return null; }
+  };
+  const writeConsent = (prefs) => {
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify({
+        prefs: { ...DEFAULTS, ...prefs, necessary: true },
+        savedAt: new Date().toISOString(),
+        version: 1
+      }));
+    } catch (_) { /* ignore */ }
+  };
+
+  const buildConsentDom = () => {
+    const wrap = document.createElement('div');
+    wrap.className = 'cookie';
+    wrap.setAttribute('role', 'dialog');
+    wrap.setAttribute('aria-live', 'polite');
+    wrap.setAttribute('aria-label', 'Pliki cookies');
+    wrap.innerHTML = `
+      <div class="cookie__panel cookie__panel--banner" data-view="banner" role="region">
+        <div class="cookie__body">
+          <h3 class="cookie__title">Szanujemy Twoją prywatność</h3>
+          <p class="cookie__text">Używamy plików cookies, aby strona działała poprawnie i żebyśmy mogli ją ulepszać. Możesz zaakceptować wszystkie, odrzucić opcjonalne lub samodzielnie wybrać kategorie. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
+        </div>
+        <div class="cookie__actions">
+          <button type="button" class="btn btn--ghost cookie__btn" data-action="reject">Odrzuć wszystkie</button>
+          <button type="button" class="btn btn--ghost cookie__btn" data-action="settings">Wybierz</button>
+          <button type="button" class="btn btn--primary cookie__btn" data-action="accept">Akceptuj wszystkie</button>
+        </div>
+      </div>
+
+      <div class="cookie__panel cookie__panel--settings" data-view="settings" hidden>
+        <div class="cookie__body">
+          <h3 class="cookie__title">Ustawienia plików cookies</h3>
+          <p class="cookie__text">Wybierz, na które kategorie cookies się zgadzasz. Cookies niezbędne są wymagane do działania strony i nie można ich wyłączyć.</p>
+          <ul class="cookie__list">
+            <li class="cookie__item">
+              <label class="cookie__row">
+                <span class="cookie__row-head">
+                  <span class="cookie__row-name">Niezbędne</span>
+                  <span class="cookie__switch cookie__switch--locked" aria-hidden="true">
+                    <input type="checkbox" checked disabled />
+                    <span class="cookie__slider"></span>
+                  </span>
+                </span>
+                <span class="cookie__row-desc">Konieczne do działania strony – m.in. zapamiętanie Twoich preferencji cookies.</span>
+              </label>
+            </li>
+            <li class="cookie__item">
+              <label class="cookie__row">
+                <span class="cookie__row-head">
+                  <span class="cookie__row-name">Analityczne</span>
+                  <span class="cookie__switch">
+                    <input type="checkbox" data-cat="analytics" />
+                    <span class="cookie__slider"></span>
+                  </span>
+                </span>
+                <span class="cookie__row-desc">Pomagają nam zrozumieć, jak korzystasz ze strony, żebyśmy mogli ją ulepszać.</span>
+              </label>
+            </li>
+            <li class="cookie__item">
+              <label class="cookie__row">
+                <span class="cookie__row-head">
+                  <span class="cookie__row-name">Marketingowe</span>
+                  <span class="cookie__switch">
+                    <input type="checkbox" data-cat="marketing" />
+                    <span class="cookie__slider"></span>
+                  </span>
+                </span>
+                <span class="cookie__row-desc">Pozwalają dopasować przekaz i mierzyć skuteczność działań – obecnie nieużywane.</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="cookie__actions">
+          <button type="button" class="btn btn--ghost cookie__btn" data-action="reject">Odrzuć wszystkie</button>
+          <button type="button" class="btn btn--ghost cookie__btn" data-action="save">Zapisz wybór</button>
+          <button type="button" class="btn btn--primary cookie__btn" data-action="accept">Akceptuj wszystkie</button>
+        </div>
+      </div>
+    `;
+    return wrap;
+  };
+
+  let consentEl = null;
+  const showView = (view) => {
+    if (!consentEl) return;
+    consentEl.querySelectorAll('[data-view]').forEach(p => {
+      p.hidden = p.getAttribute('data-view') !== view;
+    });
+  };
+  const setSwitches = (prefs) => {
+    if (!consentEl) return;
+    consentEl.querySelectorAll('input[data-cat]').forEach(inp => {
+      inp.checked = !!prefs[inp.getAttribute('data-cat')];
+    });
+  };
+  const collectSwitches = () => {
+    const prefs = { ...DEFAULTS };
+    if (!consentEl) return prefs;
+    consentEl.querySelectorAll('input[data-cat]').forEach(inp => {
+      prefs[inp.getAttribute('data-cat')] = inp.checked;
+    });
+    return prefs;
+  };
+  const closeConsent = () => {
+    if (!consentEl) return;
+    consentEl.classList.remove('is-visible');
+    setTimeout(() => { if (consentEl && consentEl.parentNode) consentEl.parentNode.removeChild(consentEl); consentEl = null; }, 250);
+  };
+  const openConsent = (view) => {
+    if (consentEl) { showView(view || 'banner'); return; }
+    consentEl = buildConsentDom();
+    document.body.appendChild(consentEl);
+    const existing = readConsent() || DEFAULTS;
+    setSwitches(existing);
+    showView(view || 'banner');
+    requestAnimationFrame(() => consentEl && consentEl.classList.add('is-visible'));
+
+    consentEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const action = btn.getAttribute('data-action');
+      if (action === 'accept') {
+        writeConsent({ necessary: true, analytics: true, marketing: true });
+        closeConsent();
+      } else if (action === 'reject') {
+        writeConsent({ necessary: true, analytics: false, marketing: false });
+        closeConsent();
+      } else if (action === 'settings') {
+        showView('settings');
+      } else if (action === 'save') {
+        writeConsent(collectSwitches());
+        closeConsent();
+      }
+    });
+  };
+
+  // First-visit banner
+  if (!readConsent()) {
+    // Slight delay so the page paints first.
+    setTimeout(() => openConsent('banner'), 350);
+  }
+
+  // Re-open from anywhere via [data-cookie-settings] link/button
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-cookie-settings]');
+    if (!trigger) return;
+    e.preventDefault();
+    openConsent('settings');
+  });
+
+  // Expose for advanced use
+  window.MebloveCookies = {
+    open: () => openConsent('banner'),
+    openSettings: () => openConsent('settings'),
+    get: readConsent,
+    reset: () => { try { localStorage.removeItem(CONSENT_KEY); } catch(_){} openConsent('banner'); }
+  };
 })();
 
