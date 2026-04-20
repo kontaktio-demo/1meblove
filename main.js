@@ -1,19 +1,15 @@
-/* Meblove – minimal interactions
-   - sticky nav scroll state
-   - mobile drawer toggle
-   - active link highlight
-   - reveal-on-scroll (IntersectionObserver) with safety fallback
-   - current year in footer
-*/
-
-// Mark the document as JS-enabled as early as possible so that
-// the .reveal CSS rules (which hide content) only kick in with JS.
 document.documentElement.classList.add('js');
 
 (() => {
   'use strict';
 
-  // ---- Nav scroll state ----
+  const setNavHeight = () => {
+    const n = document.querySelector('.nav');
+    if (!n) return;
+    const h = n.offsetHeight;
+    if (h) document.documentElement.style.setProperty('--nav-h', h + 'px');
+  };
+
   const nav = document.querySelector('.nav');
   if (nav) {
     const onScroll = () => {
@@ -22,8 +18,13 @@ document.documentElement.classList.add('js');
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // ---- Mobile drawer ----
     const burger = nav.querySelector('.nav__burger');
+    const closeDrawer = () => {
+      if (!nav.classList.contains('is-open')) return;
+      nav.classList.remove('is-open');
+      if (burger) burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
     if (burger) {
       burger.addEventListener('click', () => {
         const open = nav.classList.toggle('is-open');
@@ -31,25 +32,30 @@ document.documentElement.classList.add('js');
         document.body.style.overflow = open ? 'hidden' : '';
       });
       nav.querySelectorAll('.nav__drawer a').forEach(a => {
-        a.addEventListener('click', () => {
-          nav.classList.remove('is-open');
-          burger.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-        });
+        a.addEventListener('click', closeDrawer);
       });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDrawer();
+      });
+      const mq = window.matchMedia('(min-width: 921px)');
+      const onMq = () => { if (mq.matches) closeDrawer(); };
+      if (mq.addEventListener) mq.addEventListener('change', onMq);
+      else if (mq.addListener) mq.addListener(onMq);
     }
 
-    // ---- Active link ----
     const path = (location.pathname.split('/').pop() || 'index.html')
       .replace(/\.html$/, '')
       .toLowerCase() || 'index';
     nav.querySelectorAll('.nav__link[data-page]').forEach(a => {
-      const page = a.getAttribute('data-page').toLowerCase();
+      const page = (a.getAttribute('data-page') || '').toLowerCase();
       if (page === path) a.classList.add('is-active');
     });
   }
 
-  // ---- Reveal on scroll ----
+  setNavHeight();
+  window.addEventListener('resize', setNavHeight, { passive: true });
+  window.addEventListener('load', setNavHeight);
+
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const targets = document.querySelectorAll('.reveal');
   const showAll = () => targets.forEach(el => el.classList.add('is-in'));
@@ -66,19 +72,14 @@ document.documentElement.classList.add('js');
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(el => io.observe(el));
-    // Safety net: if anything is still hidden after 1.5s (e.g. headless
-    // screenshots, prerender, etc.), reveal it so content is never lost.
     setTimeout(showAll, 1500);
   }
 
-  // ---- Footer year ----
   const yr = document.getElementById('year');
   if (yr) yr.textContent = String(new Date().getFullYear());
 
-  // ---- Hero parallax (subtle) ----
   const heroMedia = document.querySelector('.hero__media');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (heroMedia && !reduceMotion) {
+  if (heroMedia && !reduce) {
     let ticking = false;
     const update = () => {
       const y = Math.min(window.scrollY, window.innerHeight);
@@ -91,14 +92,11 @@ document.documentElement.classList.add('js');
     update();
   }
 
-  // ---- Lightbox (for [data-lightbox] tiles) ----
   const lbTriggers = Array.from(document.querySelectorAll('[data-lightbox]'));
   if (lbTriggers.length) {
     const items = lbTriggers.map(el => {
       const innerImg = el.querySelector('img');
       return {
-        // The src always comes from a real <img> already rendered by the
-        // browser from a known set of static assets — no untrusted input.
         src: (innerImg && (innerImg.currentSrc || innerImg.src)) || '',
         alt: el.getAttribute('data-alt') || (innerImg && innerImg.alt) || '',
         caption: el.getAttribute('data-caption') || ''
@@ -111,9 +109,9 @@ document.documentElement.classList.add('js');
     lb.setAttribute('aria-modal', 'true');
     lb.setAttribute('aria-label', 'Powiększone zdjęcie realizacji');
     lb.innerHTML = `
-      <button type="button" class="lightbox__close" aria-label="Zamknij">×</button>
-      <button type="button" class="lightbox__btn lightbox__prev" aria-label="Poprzednie zdjęcie">‹</button>
-      <button type="button" class="lightbox__btn lightbox__next" aria-label="Następne zdjęcie">›</button>
+      <button type="button" class="lightbox__close" aria-label="Zamknij">x</button>
+      <button type="button" class="lightbox__btn lightbox__prev" aria-label="Poprzednie zdjęcie">&lt;</button>
+      <button type="button" class="lightbox__btn lightbox__next" aria-label="Następne zdjęcie">&gt;</button>
       <div class="lightbox__stage">
         <img class="lightbox__img" alt="" />
         <span class="lightbox__caption"></span>
@@ -149,7 +147,6 @@ document.documentElement.classList.add('js');
     const prev = () => { idx = (idx - 1 + items.length) % items.length; render(); };
 
     lbTriggers.forEach((el, i) => {
-      // make non-anchor elements act like buttons
       if (el.tagName !== 'A' && el.tagName !== 'BUTTON') {
         el.setAttribute('role', 'button');
         el.setAttribute('tabindex', '0');
@@ -175,7 +172,6 @@ document.documentElement.classList.add('js');
     });
   }
 
-  // ---- Cookie consent ----
   const CONSENT_KEY = 'meblove_cookie_consent_v1';
   const DEFAULTS = { necessary: true, analytics: false, marketing: false };
 
@@ -194,7 +190,7 @@ document.documentElement.classList.add('js');
         savedAt: new Date().toISOString(),
         version: 1
       }));
-    } catch (_) { /* ignore */ }
+    } catch (_) {}
   };
 
   const buildConsentDom = () => {
@@ -230,7 +226,7 @@ document.documentElement.classList.add('js');
                     <span class="cookie__slider"></span>
                   </span>
                 </span>
-                <span class="cookie__row-desc">Konieczne do działania strony – m.in. zapamiętanie Twoich preferencji cookies.</span>
+                <span class="cookie__row-desc">Konieczne do działania strony - m.in. zapamiętanie Twoich preferencji cookies.</span>
               </label>
             </li>
             <li class="cookie__item">
@@ -254,7 +250,7 @@ document.documentElement.classList.add('js');
                     <span class="cookie__slider"></span>
                   </span>
                 </span>
-                <span class="cookie__row-desc">Pozwalają dopasować przekaz i mierzyć skuteczność działań – obecnie nieużywane.</span>
+                <span class="cookie__row-desc">Pozwalają dopasować przekaz i mierzyć skuteczność działań - obecnie nieużywane.</span>
               </label>
             </li>
           </ul>
@@ -323,13 +319,10 @@ document.documentElement.classList.add('js');
     });
   };
 
-  // First-visit banner
   if (!readConsent()) {
-    // Slight delay so the page paints first.
     setTimeout(() => openConsent('banner'), 350);
   }
 
-  // Re-open from anywhere via [data-cookie-settings] link/button
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('[data-cookie-settings]');
     if (!trigger) return;
@@ -337,7 +330,6 @@ document.documentElement.classList.add('js');
     openConsent('settings');
   });
 
-  // Expose for advanced use
   window.MebloveCookies = {
     open: () => openConsent('banner'),
     openSettings: () => openConsent('settings'),
@@ -345,4 +337,3 @@ document.documentElement.classList.add('js');
     reset: () => { try { localStorage.removeItem(CONSENT_KEY); } catch(_){} openConsent('banner'); }
   };
 })();
-
