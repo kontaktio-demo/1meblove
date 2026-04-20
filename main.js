@@ -94,11 +94,24 @@ document.documentElement.classList.add('js');
   // ---- Lightbox (for [data-lightbox] tiles) ----
   const lbTriggers = Array.from(document.querySelectorAll('[data-lightbox]'));
   if (lbTriggers.length) {
-    const items = lbTriggers.map(el => ({
-      src: el.getAttribute('data-src') || (el.querySelector('img') && el.querySelector('img').currentSrc) || (el.querySelector('img') && el.querySelector('img').src) || '',
-      alt: el.getAttribute('data-alt') || (el.querySelector('img') && el.querySelector('img').alt) || '',
-      caption: el.getAttribute('data-caption') || ''
-    }));
+    const items = lbTriggers.map(el => {
+      const innerImg = el.querySelector('img');
+      return {
+        src: el.getAttribute('data-src') || (innerImg && (innerImg.currentSrc || innerImg.src)) || '',
+        alt: el.getAttribute('data-alt') || (innerImg && innerImg.alt) || '',
+        caption: el.getAttribute('data-caption') || ''
+      };
+    });
+
+    // Allow only safe relative/absolute http(s) image paths to prevent
+    // javascript:/data: URLs from being injected via data-src.
+    const safeSrc = (s) => {
+      if (typeof s !== 'string') return '';
+      const trimmed = s.trim();
+      if (/^\s*javascript:/i.test(trimmed)) return '';
+      if (/^\s*data:/i.test(trimmed)) return '';
+      return trimmed;
+    };
 
     const lb = document.createElement('div');
     lb.className = 'lightbox';
@@ -123,7 +136,7 @@ document.documentElement.classList.add('js');
 
     const render = () => {
       const it = items[idx];
-      imgEl.src = it.src;
+      imgEl.src = safeSrc(it.src);
       imgEl.alt = it.alt;
       capEl.textContent = it.caption || ('Realizacja ' + (idx + 1) + ' / ' + items.length);
     };
