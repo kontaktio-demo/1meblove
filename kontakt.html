@@ -109,10 +109,13 @@
             <span class="field__hint">Możesz załączyć kilka plików (do 10 MB łącznie). Wystarczą zdjęcia z telefonu.</span>
           </div>
 
-          <div class="field">
-            <label style="display:flex; gap:10px; align-items:flex-start; font-weight:400; color: var(--ink-soft); font-size: 0.9rem;">
-              <input type="checkbox" name="rodo" required style="margin-top: 4px;" />
-              <span>Wyrażam zgodę na przetwarzanie moich danych w celu odpowiedzi na zapytanie. Szczegóły w <a href="polityka-prywatnosci.html" style="color: var(--espresso); text-decoration: underline;">polityce prywatności</a>.</span>
+          <div class="field field--consent">
+            <label class="consent">
+              <input type="checkbox" name="rodo" required class="consent__input" />
+              <span class="consent__box" aria-hidden="true">
+                <svg viewBox="0 0 16 16" focusable="false"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="consent__text">Wyrażam zgodę na przetwarzanie moich danych w celu odpowiedzi na zapytanie. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</span>
             </label>
           </div>
 
