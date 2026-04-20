@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Meblove">
-  <rect width="64" height="64" rx="8" fill="#0F0E0D"/>
-  <text x="50%" y="62%" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="600" font-size="34" fill="#FAFAF8">M</text>
+  <rect width="64" height="64" rx="10" fill="#3B2A23"/>
+  <text x="50%" y="64%" text-anchor="middle" font-family="Georgia, 'Playfair Display', serif" font-weight="500" font-size="36" fill="#F5F0EA">M</text>
 </svg>

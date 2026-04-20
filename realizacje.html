@@ -2,282 +2,199 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.classList.add("js")</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Realizacje — Meblove</title>
+  <title>Realizacje – szafy i zabudowy z Łodzi | Meblove</title>
+  <meta name="description" content="Wybrane realizacje Meblove: szafy na wymiar, zabudowy wnęk, kuchnie i zabudowy salonu z różnych dzielnic Łodzi." />
+  <meta name="theme-color" content="#F5F3F0" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#0F0E0D">
-  <meta name="description" content="Meblove — studio projektowe z Łodzi. Projektujemy i wykonujemy meble na wymiar z naturalnego drewna.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ── Navigation ──────────────────────────── -->
-  <nav class="nav">
+  <header class="nav" role="banner">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo" aria-label="Meblove.com.pl — Strona główna"><img src="assets/logo.svg" alt="Meblove.com.pl" class="nav__logo-img"><span class="nav__logo-text">Meblove</span></a>
-      <ul class="nav__links">
-        <li><a href="nasze-meble.html" class="nav__link" data-page="nasze-meble.html">Nasze meble</a></li>
-        <li><a href="realizacje.html"  class="nav__link" data-page="realizacje.html">Realizacje</a></li>
-        <li><a href="o-nas.html"       class="nav__link" data-page="o-nas.html">O nas</a></li>
-        <li><a href="kontakt.html"     class="nav__link" data-page="kontakt.html">Kontakt</a></li>
-        <li><a href="kontakt.html"     class="btn nav__cta">Napisz do nas</a></li>
-      </ul>
-      <button class="nav__burger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-  <div class="nav__drawer">
-    <a href="nasze-meble.html" class="nav__link">Nasze meble</a>
-    <a href="realizacje.html"  class="nav__link">Realizacje</a>
-    <a href="o-nas.html"       class="nav__link">O nas</a>
-    <a href="kontakt.html"     class="nav__link">Kontakt</a>
-    <a href="kontakt.html"     class="btn btn-primary" style="margin-top:1rem">Napisz do nas</a>
-  </div>
-
-  <main>
-
-    <!-- ── Page header ───────────────────────── -->
-    <div class="page-header">
-      <div class="container">
-        <p class="page-header__eyebrow">Portfolio</p>
-        <h1 class="page-header__title">Nasze realizacje</h1>
-        <p class="page-header__sub">
-          Zdjęcia mebli, które zrobiliśmy dla klientów z Łodzi
-          i okolic. Każdy projekt był inny — bo każde wnętrze jest inne.
-        </p>
+      <a href="index.html" class="nav__logo" aria-label="Meblove – strona główna">
+        <picture><source srcset="photos/logo.webp" type="image/webp" /><img src="photos/logo.png" alt="Meblove" width="160" height="58" /></picture>
+      </a>
+      <nav aria-label="Główna nawigacja">
+        <ul class="nav__links">
+          <li><a class="nav__link" data-page="realizacje"  href="realizacje.html">Realizacje</a></li>
+          <li><a class="nav__link" data-page="oferta"      href="oferta.html">Oferta</a></li>
+          <li><a class="nav__link" data-page="o-pracowni"  href="o-pracowni.html">O pracowni</a></li>
+          <li><a class="nav__link" data-page="faq"         href="faq.html">FAQ</a></li>
+          <li><a class="nav__link" data-page="kontakt"     href="kontakt.html">Kontakt</a></li>
+          <li><a class="btn btn--primary nav__cta" href="kontakt.html">Bezpłatna wycena</a></li>
+        </ul>
+      </nav>
+      <button class="nav__burger" aria-label="Otwórz menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <div class="nav__drawer" role="dialog" aria-label="Menu mobilne">
+        <a class="nav__link" href="realizacje.html">Realizacje</a>
+        <a class="nav__link" href="oferta.html">Oferta</a>
+        <a class="nav__link" href="o-pracowni.html">O pracowni</a>
+        <a class="nav__link" href="faq.html">FAQ</a>
+        <a class="nav__link" href="kontakt.html">Kontakt</a>
+        <a class="btn btn--primary" href="kontakt.html">Bezpłatna wycena</a>
       </div>
     </div>
-    <hr class="divider" />
+  </header>
 
-    <!-- ── Featured project ──────────────────── -->
-    <section class="section">
-      <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-bottom:var(--s-16);">
-          <div style="display:flex;flex-direction:column;gap:var(--s-3);">
-            <div class="placeholder-img" style="flex:1;aspect-ratio:4/3;background:linear-gradient(135deg,#6B4226,#3E2010);"></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);">
-              <div class="placeholder-img" style="aspect-ratio:1;background:linear-gradient(135deg,#8C5830,#5C3010);"></div>
-              <div class="placeholder-img" style="aspect-ratio:1;background:linear-gradient(135deg,#A06838,#704828);"></div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;justify-content:center;padding:var(--s-6) 0 var(--s-6) var(--s-6);">
-            <p class="section__eyebrow fade-up">Wyróżniony projekt</p>
-            <h2 class="section__title fade-up" style="margin-bottom:var(--s-5);">
-              Zabudowa salonu — Widzew, Łódź
-            </h2>
-            <p style="font-size:var(--f-body);font-weight:300;color:var(--subtle);line-height:1.65;max-width:44ch;" class="fade-up">
-              Klient miał jasny pomysł: zabudowa całej ściany z miejscem na
-              telewizor, biblioteczką i ukrytymi schowkami. Projekt opracowaliśmy
-              wspólnie w ciągu dwóch spotkań. Drewno: lity dąb olejowany na
-              kolor naturalny. Czas realizacji: 6 tygodni.
-            </p>
-            <div style="margin-top:var(--s-6);display:flex;flex-direction:column;gap:var(--s-3);" class="fade-up">
-              <div style="display:flex;gap:var(--s-8);">
-                <div>
-                  <p style="font-size:var(--f-label);font-weight:500;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Materiał</p>
-                  <p style="font-size:var(--f-sm);font-weight:300;">Dąb olejowany</p>
-                </div>
-                <div>
-                  <p style="font-size:var(--f-label);font-weight:500;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Lokalizacja</p>
-                  <p style="font-size:var(--f-sm);font-weight:300;">Widzew, Łódź</p>
-                </div>
-                <div>
-                  <p style="font-size:var(--f-label);font-weight:500;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Rok</p>
-                  <p style="font-size:var(--f-sm);font-weight:300;">2024</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <section class="subhero">
+    <div class="container subhero__inner">
+      <span class="eyebrow reveal">Realizacje</span>
+      <h1 class="reveal delay-1">Nasze realizacje</h1>
+      <p class="lead reveal delay-2">Każdy projekt jest inny – dopasowany do wnętrza, potrzeb i budżetu. Zobacz kilka wybranych realizacji szaf na wymiar, zabudów wnęk i kuchni z Łodzi.</p>
+    </div>
+  </section>
 
-        <hr class="divider" />
-
-        <!-- ── Filters ──── -->
-        <div style="padding-block:var(--s-8);">
-          <div class="filters" style="margin:0;">
-            <button class="filter-btn active">Wszystko</button>
-            <button class="filter-btn">Salon</button>
-            <button class="filter-btn">Sypialnia</button>
-            <button class="filter-btn">Jadalnia</button>
-            <button class="filter-btn">Zabudowy</button>
-            <button class="filter-btn">Gabinet</button>
-          </div>
-        </div>
-
-        <!-- ── Grid ─────── -->
-        <div class="portfolio-grid">
-
-          <div class="portfolio-item portfolio-item--wide">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#D4C4A8,#B0A088);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Szafa na wymiar</div>
-                Bałuty, Łódź · 2024
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--narrow">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#6B4226,#3E2010);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Łóżko z orzecha</div>
-                Polesie, Łódź · 2024
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--narrow">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#C8925C,#A06B3A);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Stół dębowy 240 cm</div>
-                Śródmieście, Łódź · 2024
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--wide">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#C4A882,#8C7858);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Zabudowa ściany</div>
-                Górna, Łódź · 2023
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--half">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#3A3330,#1A1714);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Biurko z szufladami</div>
-                Górna · 2023
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--half">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#D8CCBE,#A89E90);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Sofa z jasionem</div>
-                Bałuty, Łódź · 2023
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--narrow">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#A09070,#786850);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Komoda dębowa</div>
-                Retkinia · 2023
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--wide">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#B0A088,#908060);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Regał z biblioteczką</div>
-                Polesie, Łódź · 2022
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--half">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#5C3A1E,#3A2010);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Krzesła jadalniane ×6</div>
-                Śródmieście · 2022
-              </div>
-            </div>
-          </div>
-
-          <div class="portfolio-item portfolio-item--half">
-            <div class="placeholder-img" style="background:linear-gradient(135deg,#E0D0B8,#C0B098);"></div>
-            <div class="portfolio-item__overlay">
-              <div class="portfolio-item__label">
-                <div style="font-size:var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:4px;">Stolik kawowy z marmuru</div>
-                Widzew · 2022
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CTA ───────────────────────────────── -->
-    <section class="cta-banner">
-      <div class="container">
-        <div class="cta-banner__inner">
-          <h2 class="cta-banner__title fade-up">
-            Spodobało się coś? Możemy zrobić coś podobnego dla Ciebie.
-          </h2>
-          <a href="kontakt.html" class="btn fade-up"
-             style="background:var(--canvas);color:var(--ink);flex-shrink:0;">
-            Napisz do nas
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
+  <section class="section">
     <div class="container">
-      <div class="footer__grid">
+      <div class="grid grid-3">
+        <article class="tile reveal">
+          <div class="tile__media"><picture>
+            <source srcset="photos/szafa-przedpokoj.avif" type="image/avif" />
+            <source srcset="photos/szafa-przedpokoj.webp" type="image/webp" />
+            <img src="photos/szafa-przedpokoj.webp" alt="Szafa wnękowa – Bałuty, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Szafa wnękowa – Bałuty, Łódź</h3>
+            <p class="tile__desc">Wąska wnęka w przedpokoju została zamieniona w pełną zabudowę z frontami przesuwnymi i lustrami na całej wysokości. Wewnątrz: drążki, półki na buty i miejsce na walizki.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal delay-1">
+          <div class="tile__media"><picture>
+            <source srcset="photos/zabudowa-kuchenna.avif" type="image/avif" />
+            <source srcset="photos/zabudowa-kuchenna.webp" type="image/webp" />
+            <img src="photos/zabudowa-kuchenna.webp" alt="Zabudowa kuchni – Widzew, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Zabudowa kuchni – Widzew</h3>
+            <p class="tile__desc">Kuchnia na wymiar w bloku z lat 70. Wykorzystaliśmy wysokość pomieszczenia – wysoka zabudowa pod sufit i narożnik z półkami obrotowymi dały dwa razy więcej miejsca do przechowywania.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal delay-2">
+          <div class="tile__media"><picture>
+            <source srcset="photos/szafa-sypialnia.avif" type="image/avif" />
+            <source srcset="photos/szafa-sypialnia.webp" type="image/webp" />
+            <img src="photos/szafa-sypialnia.webp" alt="Szafa do sypialni – Polesie, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Szafa do sypialni – Polesie</h3>
+            <p class="tile__desc">Sypialnia na poddaszu z trudnymi skosami. Szafa z frontami lakierowanymi i cichym domykiem dopasowana milimetr w milimetr do połaci dachowej.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal">
+          <div class="tile__media"><picture>
+            <source srcset="photos/zabudowa-rtv.avif" type="image/avif" />
+            <source srcset="photos/zabudowa-rtv.webp" type="image/webp" />
+            <img src="photos/zabudowa-rtv.webp" alt="Zabudowa RTV – Śródmieście, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Zabudowa RTV – Śródmieście</h3>
+            <p class="tile__desc">Minimalistyczna zabudowa pod telewizor w mieszkaniu w starej kamienicy. Cienkie półki na książki, ukryte miejsce na sprzęt audio i przewody schowane w ścianie.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal delay-1">
+          <div class="tile__media"><picture>
+            <source srcset="photos/garderoba.avif" type="image/avif" />
+            <source srcset="photos/garderoba.webp" type="image/webp" />
+            <img src="photos/garderoba.webp" alt="Garderoba na wymiar – Retkinia, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Garderoba – Retkinia</h3>
+            <p class="tile__desc">Mała sypialnia w bloku, z której „odzyskaliśmy” miejsce na pełną garderobę. Otwarte półki, drążki na trzech wysokościach i szuflady na dole – wszystko za jasnymi, gładkimi frontami.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal delay-2">
+          <div class="tile__media"><picture>
+            <source srcset="photos/zabudowa-wneki.avif" type="image/avif" />
+            <source srcset="photos/zabudowa-wneki.webp" type="image/webp" />
+            <img src="photos/zabudowa-wneki.webp" alt="Zabudowa wnęki – Górna, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Zabudowa wnęki – Górna</h3>
+            <p class="tile__desc">Trudna wnęka między ścianą a kominem zamieniona w schowek z miejscem na odkurzacz, deskę do prasowania i drobny sprzęt. Front identyczny z resztą ściany – zabudowa nie rzuca się w oczy.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal">
+          <div class="tile__media"><picture>
+            <source srcset="photos/zabudowa-kuchenna.avif" type="image/avif" />
+            <source srcset="photos/zabudowa-kuchenna.webp" type="image/webp" />
+            <img src="photos/zabudowa-kuchenna.webp" alt="Kuchnia w kawalerce – Stare Polesie, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Kuchnia w kawalerce – Stare Polesie</h3>
+            <p class="tile__desc">Aneks kuchenny w 28-metrowej kawalerce. Ukryta lodówka, indukcja zintegrowana z blatem i wysoki słupek z miejscem na piekarnik. Otwarte na salon, ale spokojne wizualnie.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal delay-1">
+          <div class="tile__media"><picture>
+            <source srcset="photos/szafa-przedpokoj.avif" type="image/avif" />
+            <source srcset="photos/szafa-przedpokoj.webp" type="image/webp" />
+            <img src="photos/szafa-przedpokoj.webp" alt="Zabudowa przedpokoju – Chojny, Łódź" loading="lazy" /></picture></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Zabudowa przedpokoju – Chojny</h3>
+            <p class="tile__desc">Wąski korytarz w domu jednorodzinnym. Pełna zabudowa od podłogi do sufitu z miejscem na buty, kurtki, plecaki i sezonowe rzeczy – wszystko za gładkimi frontami bez uchwytów.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--beige">
+    <div class="container">
+      <div class="cta-banner reveal">
         <div>
-          <p class="footer__brand"><img src="assets/logo.svg" alt="Meblove.com.pl" class="footer__logo-img"></p>
-          <p class="footer__tagline">Studio projektowe z Łodzi. Projektujemy i wykonujemy meble na wymiar — z naturalnego drewna, z dbałością o detal.</p>
+          <h2>Chcesz mieć podobnie u siebie?</h2>
+          <p>Każda z tych realizacji zaczęła się od krótkiej wiadomości i kilku zdjęć wnętrza. U Ciebie może być tak samo – wyceny i wstępne rozmowy zawsze są bezpłatne.</p>
         </div>
-        <div>
-          <p class="footer__heading">Strony</p>
-          <ul class="footer__links">
-            <li><a href="nasze-meble.html" class="footer__link">Nasze meble</a></li>
-            <li><a href="realizacje.html"  class="footer__link">Realizacje</a></li>
-            <li><a href="o-nas.html"       class="footer__link">O nas</a></li>
-            <li><a href="kontakt.html"     class="footer__link">Kontakt</a></li>
+        <a class="btn btn--light btn--lg" href="kontakt.html">Poproś o bezpłatną wycenę</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <picture><source srcset="photos/logo.webp" type="image/webp" /><img src="photos/logo.png" alt="Meblove" width="160" height="58" /></picture>
+          <p>Meblove – meble na wymiar z Łodzi. Szafy, zabudowy wnęk, kuchnie i salony projektowane co do milimetra.</p>
+        </div>
+        <div class="footer__col"><h5>Strona</h5>
+          <ul>
+            <li><a href="realizacje.html">Realizacje</a></li>
+            <li><a href="oferta.html">Oferta</a></li>
+            <li><a href="o-pracowni.html">O pracowni</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
           </ul>
         </div>
-        <div>
-          <p class="footer__heading">Co robimy</p>
-          <ul class="footer__links">
-            <li><a href="nasze-meble.html" class="footer__link">Meble do salonu</a></li>
-            <li><a href="nasze-meble.html" class="footer__link">Meble do sypialni</a></li>
-            <li><a href="nasze-meble.html" class="footer__link">Stoły i krzesła</a></li>
-            <li><a href="nasze-meble.html" class="footer__link">Szafy na wymiar</a></li>
+        <div class="footer__col"><h5>Kontakt</h5>
+          <ul>
+            <li>Pracownia Meblove<br/>ul. Drewnowska 58<br/>91-002 Łódź</li>
+            <li><a href="tel:+48500600700">+48 500 600 700</a></li>
+            <li><a href="mailto:pracownia@meblove.pl">pracownia@meblove.pl</a></li>
           </ul>
         </div>
-        <div>
-          <p class="footer__heading">Kontakt</p>
-          <ul class="footer__links">
-            <li><span class="footer__link" style="line-height:1.6;">ul. Piotrkowska 137<br>91-463 Łódź</span></li>
-            <li><a href="tel:+48501234567"         class="footer__link">+48 501 234 567</a></li>
-            <li><a href="mailto:kontakt@meblove.pl" class="footer__link">kontakt@meblove.pl</a></li>
+        <div class="footer__col"><h5>Godziny kontaktu</h5>
+          <ul>
+            <li>pon.–pt.&nbsp;&nbsp;9:00 – 17:00</li>
+            <li>sob.&nbsp;&nbsp;po umówieniu</li>
+            <li>Pomiar u klienta:<br/>Łódź i okolice (do ok. 40 km)</li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2025 Meblove — Meble na wymiar · Łódź</span>
-        <nav class="footer__legal" aria-label="Informacje prawne">
-          <a href="polityka-prywatnosci.html" class="footer__link">Polityka prywatności</a>
-          <a href="regulamin.html" class="footer__link">Regulamin</a>
-          <button type="button" class="footer__link" onclick="window.mebloveOpenCookieSettings && window.mebloveOpenCookieSettings()">Ustawienia cookies</button>
-        </nav>
-        <span class="footer__credit">Strona stworzona przez <a href="https://kontaktio.pl" target="_blank" rel="noopener">kontaktio.pl</a></span>
+        <span>© <span id="year">2025</span> Meblove. Meble na wymiar Łódź.</span>
+        <span><a href="polityka-prywatnosci.html">Polityka prywatności</a> &nbsp;·&nbsp; <a href="regulamin.html">Regulamin</a></span>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="main.js" defer></script>
 </body>
 </html>
