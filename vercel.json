@@ -64,6 +64,12 @@
       ]
     },
     {
+      "source": "/:path*.avif",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    },
+    {
       "source": "/:path*.woff2",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=604800" }
