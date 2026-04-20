@@ -8,9 +8,11 @@
   <meta name="description" content="Napisz do Meblove – pracowni mebli na wymiar w Łodzi. Bezpłatna wycena szaf na wymiar, zabudów wnęk, kuchni i zabudów salonu." />
   <meta name="theme-color" content="#F5F3F0" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -52,9 +54,14 @@
 
   <section class="section">
     <div class="container">
+      <div class="contact-cta reveal">
+        <h2>Porozmawiajmy o Twojej zabudowie.</h2>
+        <p>Odpowiadamy zwykle w&nbsp;ciągu jednego dnia roboczego. Wycena i&nbsp;wstępne rozmowy są zawsze bezpłatne.</p>
+      </div>
+
       <div class="contact-grid">
 
-        <form class="form reveal" action="mailto:pracownia@meblove.pl" method="post" enctype="multipart/form-data" novalidate>
+        <form class="form form--card reveal" action="mailto:pracownia@meblove.pl" method="post" enctype="multipart/form-data" novalidate>
           <div class="form__row">
             <div class="field">
               <label for="name">Imię</label>

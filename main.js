@@ -75,6 +75,101 @@ document.documentElement.classList.add('js');
   const yr = document.getElementById('year');
   if (yr) yr.textContent = String(new Date().getFullYear());
 
+  // ---- Hero parallax (subtle) ----
+  const heroMedia = document.querySelector('.hero__media');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroMedia && !reduceMotion) {
+    let ticking = false;
+    const update = () => {
+      const y = Math.min(window.scrollY, window.innerHeight);
+      heroMedia.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0)';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  }
+
+  // ---- Lightbox (for [data-lightbox] tiles) ----
+  const lbTriggers = Array.from(document.querySelectorAll('[data-lightbox]'));
+  if (lbTriggers.length) {
+    const items = lbTriggers.map(el => ({
+      src: el.getAttribute('data-src') || (el.querySelector('img') && el.querySelector('img').currentSrc) || (el.querySelector('img') && el.querySelector('img').src) || '',
+      alt: el.getAttribute('data-alt') || (el.querySelector('img') && el.querySelector('img').alt) || '',
+      caption: el.getAttribute('data-caption') || ''
+    }));
+
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Powiększone zdjęcie realizacji');
+    lb.innerHTML = `
+      <button type="button" class="lightbox__close" aria-label="Zamknij">×</button>
+      <button type="button" class="lightbox__btn lightbox__prev" aria-label="Poprzednie zdjęcie">‹</button>
+      <button type="button" class="lightbox__btn lightbox__next" aria-label="Następne zdjęcie">›</button>
+      <div class="lightbox__stage">
+        <img class="lightbox__img" alt="" />
+        <span class="lightbox__caption"></span>
+      </div>
+    `;
+    document.body.appendChild(lb);
+
+    const imgEl = lb.querySelector('.lightbox__img');
+    const capEl = lb.querySelector('.lightbox__caption');
+    let idx = 0;
+    let lastFocus = null;
+
+    const render = () => {
+      const it = items[idx];
+      imgEl.src = it.src;
+      imgEl.alt = it.alt;
+      capEl.textContent = it.caption || ('Realizacja ' + (idx + 1) + ' / ' + items.length);
+    };
+    const open = (i, originEl) => {
+      idx = i;
+      lastFocus = originEl || document.activeElement;
+      render();
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      lb.querySelector('.lightbox__close').focus();
+    };
+    const close = () => {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    };
+    const next = () => { idx = (idx + 1) % items.length; render(); };
+    const prev = () => { idx = (idx - 1 + items.length) % items.length; render(); };
+
+    lbTriggers.forEach((el, i) => {
+      // make non-anchor elements act like buttons
+      if (el.tagName !== 'A' && el.tagName !== 'BUTTON') {
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+      }
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        open(i, el);
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i, el); }
+      });
+    });
+
+    lb.querySelector('.lightbox__close').addEventListener('click', close);
+    lb.querySelector('.lightbox__next').addEventListener('click', next);
+    lb.querySelector('.lightbox__prev').addEventListener('click', prev);
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') next();
+      else if (e.key === 'ArrowLeft') prev();
+    });
+  }
+
   // ---- Cookie consent ----
   const CONSENT_KEY = 'meblove_cookie_consent_v1';
   const DEFAULTS = { necessary: true, analytics: false, marketing: false };
