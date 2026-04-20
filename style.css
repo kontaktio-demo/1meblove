@@ -1,19 +1,5 @@
-/* =========================================================
-   Meblove – premium architectural design system
-   Paleta (stonowana, premium studio):
-     #0E0E0D – ink (czarno-grafit)
-     #1A1916 – espresso (CTA, akcenty)
-     #6F6A63 – ink-soft (tekst pomocniczy)
-     #F4F1EC – off-white (tło bazowe)
-     #FAF8F4 – tło ekstra-jasnej sekcji
-     #E7DFD2 – beżowe tło sekcji
-     #D9C7B3 – beżowy akcent
-   Typografia:
-     Primary (display + body): "Satoshi"
-     Secondary (UI / eyebrow): "Inter Tight"
-   ========================================================= */
 
-/* ---------- 1. Reset & base ---------- */
+
 *,
 *::before,
 *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,7 +7,7 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 :root {
-  /* Palette */
+  
   --bg:          #F4F1EC;
   --bg-soft:     #FAF8F4;
   --bg-warm:     #EFE8DD;
@@ -32,21 +18,20 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   --espresso:    #1A1916;
   --espresso-h:  #2A2723;
 
-  /* Lines / shadows */
+  
   --line:        rgba(14, 14, 13, 0.12);
   --line-soft:   rgba(14, 14, 13, 0.06);
   --shadow-sm:   0 2px 6px  rgba(14, 14, 13, 0.05);
   --shadow-md:   0 14px 40px rgba(14, 14, 13, 0.08);
   --shadow-lg:   0 28px 80px rgba(14, 14, 13, 0.16);
 
-  /* Radius */
   --radius:      4px;
   --radius-lg:   6px;
 
-  /* Layout */
   --maxw:        1320px;
+  --nav-h:       86px;
 
-  /* Spacing scale */
+  
   --space-3:    8px;
   --space-4:   12px;
   --space-5:   16px;
@@ -58,12 +43,12 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   --space-11: 120px;
   --space-12: 160px;
 
-  /* Typography */
+  
   --font-display: "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-body:    "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-ui:      "Inter Tight", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  /* Type scale */
+  
   --fs-eyebrow: 0.74rem;
   --fs-body:    1.0625rem;
   --fs-lead:    1.18rem;
@@ -72,7 +57,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   --fs-h2:      clamp(2.1rem, 4.2vw, 3.6rem);
   --fs-h1:      clamp(2.8rem, 6.5vw, 5.8rem);
 
-  /* Motion */
+  
   --t-fast:      180ms cubic-bezier(.2,.7,.2,1);
   --t:           260ms cubic-bezier(.2,.7,.2,1);
   --t-slow:      700ms cubic-bezier(.2,.7,.2,1);
@@ -98,7 +83,6 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 
 ::selection { background: var(--espresso); color: var(--bg); }
 
-/* ---------- 2. Typografia ---------- */
 h1, h2, h3, h4, h5, .display {
   font-family: var(--font-display);
   font-weight: 500;
@@ -124,7 +108,6 @@ p { color: var(--ink); }
   display: inline-block;
 }
 
-/* ---------- 3. Layout helpers ---------- */
 .container {
   width: 100%;
   max-width: var(--maxw);
@@ -173,7 +156,6 @@ p { color: var(--ink); }
 @media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
 
-/* ---------- 4. Buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -241,7 +223,6 @@ p { color: var(--ink); }
 .link-arrow:hover { gap: 14px; opacity: 0.7; }
 .link-arrow:hover::after { transform: translateX(4px); }
 
-/* ---------- 5. Navigation ---------- */
 .nav {
   position: sticky;
   top: 0;
@@ -256,7 +237,7 @@ p { color: var(--ink); }
   background: rgba(244,241,236,0.94);
   border-bottom-color: var(--line-soft);
 }
-/* Hero pages get a transparent nav over the image until scroll */
+
 .has-hero .nav:not(.is-scrolled) {
   background: transparent;
   border-bottom-color: transparent;
@@ -273,8 +254,14 @@ p { color: var(--ink); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 86px;
+  height: var(--nav-h);
   gap: 24px;
+}
+@media (max-width: 920px) {
+  :root { --nav-h: 68px; }
+}
+@media (max-width: 480px) {
+  :root { --nav-h: 60px; }
 }
 .nav__logo {
   display: inline-flex;
@@ -355,24 +342,50 @@ p { color: var(--ink); }
 
 .nav__drawer {
   position: fixed;
-  inset: 86px 0 0 0;
+  inset: var(--nav-h) 0 0 0;
   background: var(--bg);
-  padding: 36px 28px;
-  display: none;
+  padding: 28px 24px calc(28px + env(safe-area-inset-bottom, 0px));
+  display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   z-index: 49;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity var(--t), transform var(--t), visibility 0s linear var(--t);
 }
 .nav__drawer .nav__link { padding: 14px 16px; font-size: 1.15rem; color: var(--ink); }
 .nav__drawer .btn { margin-top: 16px; align-self: flex-start; }
-.nav.is-open .nav__drawer { display: flex; }
+.nav.is-open .nav__drawer {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity var(--t), transform var(--t), visibility 0s;
+}
+.nav.is-open {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(244,241,236,0.94);
+}
+.has-hero .nav:not(.is-scrolled).is-open {
+  background: rgba(244,241,236,0.94);
+  border-bottom-color: var(--line-soft);
+}
+.has-hero .nav:not(.is-scrolled).is-open .nav__logo-mark,
+.has-hero .nav:not(.is-scrolled).is-open .nav__logo-dot { color: var(--ink); }
+.has-hero .nav:not(.is-scrolled).is-open .nav__burger span { background: var(--ink); }
 
+@media (min-width: 921px) {
+  .nav__drawer { display: none !important; }
+}
 @media (max-width: 920px) {
   .nav__links { display: none; }
   .nav__burger { display: block; }
+  .nav__inner { gap: 12px; }
 }
 
-/* ---------- 6. Hero (premium full-bleed) ---------- */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -382,8 +395,8 @@ p { color: var(--ink); }
   color: #F4EFE6;
   isolation: isolate;
   overflow: hidden;
-  margin-top: -86px;
-  padding-top: 86px;
+  margin-top: calc(-1 * var(--nav-h));
+  padding-top: var(--nav-h);
 }
 .hero__media,
 .hero__media picture,
@@ -391,7 +404,7 @@ p { color: var(--ink); }
   position: absolute;
   inset: 0;
   width: 100%;
-  /* Extra 10% provides scroll range for the JS parallax effect */
+  
   height: 110%;
   object-fit: cover;
   z-index: -2;
@@ -476,7 +489,6 @@ p { color: var(--ink); }
 }
 @media (max-width: 720px) { .hero__scroll { display: none; } }
 
-/* Sub-hero for inner pages */
 .subhero {
   padding: clamp(140px, 18vw, 220px) 0 clamp(72px, 9vw, 120px);
   background: var(--bg);
@@ -485,7 +497,6 @@ p { color: var(--ink); }
 .subhero__inner { max-width: 920px; }
 .subhero h1 { margin: 18px 0 22px; letter-spacing: -0.035em; }
 
-/* ---------- 7. Cards ---------- */
 .card {
   background: transparent;
   border-radius: var(--radius-lg);
@@ -519,7 +530,6 @@ p { color: var(--ink); }
 .card__desc { color: var(--ink-soft); font-size: 0.97rem; line-height: 1.6; }
 .card__foot { margin-top: auto; padding-top: 16px; }
 
-/* Service-tile (image-driven, "Co robimy") */
 .service-tile {
   position: relative;
   display: block;
@@ -589,6 +599,10 @@ p { color: var(--ink); }
   opacity: 1;
   margin-top: 4px;
 }
+@media (hover: none) {
+  .service-tile p { max-height: 8em; opacity: 1; margin-top: 4px; }
+  .service-tile__overlay { background: linear-gradient(180deg, rgba(8,7,6,0.05) 0%, rgba(8,7,6,0.75) 100%); }
+}
 .service-tile__arrow {
   position: absolute;
   top: clamp(20px, 2.4vw, 28px);
@@ -607,7 +621,6 @@ p { color: var(--ink); }
 .service-tile:hover .service-tile__arrow { background: #F4EFE6; color: var(--ink); transform: rotate(-45deg); }
 .service-tile__arrow::before { content: "→"; font-size: 1.05rem; line-height: 1; }
 
-/* Service card (icon-only fallback / inner pages) */
 .service-card {
   background: var(--bg-soft);
   border: 1px solid var(--line-soft);
@@ -637,7 +650,6 @@ p { color: var(--ink); }
 .service-card p { color: var(--ink-soft); font-size: 0.97rem; }
 .service-card__foot { margin-top: auto; padding-top: 12px; }
 
-/* Process step */
 .steps {
   counter-reset: step;
   border-top: 1px solid var(--line);
@@ -677,11 +689,14 @@ p { color: var(--ink); }
 }
 .step__icon svg { width: 26px; height: 26px; }
 @media (max-width: 720px) {
-  .step { grid-template-columns: 1fr; gap: 16px; padding-right: 70px; }
-  .step__icon { top: 28px; width: 48px; height: 48px; }
+  .step { grid-template-columns: 1fr; gap: 16px; padding-right: 64px; }
+  .step__icon { top: 28px; width: 44px; height: 44px; right: 0; }
+}
+@media (max-width: 480px) {
+  .step { padding-right: 0; }
+  .step__icon { display: none; }
 }
 
-/* Feature (why us) */
 .feature {
   display: flex;
   flex-direction: column;
@@ -702,7 +717,6 @@ p { color: var(--ink); }
 .feature h4 { font-size: 1.1rem; }
 .feature p { color: var(--ink-soft); font-size: 0.97rem; line-height: 1.6; }
 
-/* Realization tile (premium 16:9) */
 .tile {
   position: relative;
   border-radius: var(--radius-lg);
@@ -757,6 +771,10 @@ p { color: var(--ink); }
 .tile:focus-visible::after { opacity: 1; }
 .tile:hover .tile__caption,
 .tile:focus-visible .tile__caption { opacity: 1; transform: translateY(0); }
+@media (hover: none) {
+  .tile::after { opacity: 1; }
+  .tile__caption { opacity: 1; transform: translateY(0); }
+}
 .tile__caption-eyebrow {
   font-family: var(--font-ui);
   font-size: 0.7rem;
@@ -771,7 +789,6 @@ p { color: var(--ink); }
   color: #F7F2EC;
 }
 
-/* Realizacje grid layout (asymmetric premium) */
 .realizacje-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -793,7 +810,6 @@ p { color: var(--ink); }
   .realizacje-grid > .tile.tile--third { grid-column: span 1; }
 }
 
-/* CTA banner (premium dark) */
 .cta-banner {
   background: var(--ink);
   color: #F4EFE6;
@@ -811,7 +827,6 @@ p { color: var(--ink); }
   .cta-banner { grid-template-columns: 1fr; padding: 44px 32px; }
 }
 
-/* ---------- 8. Forms ---------- */
 .form {
   display: grid;
   gap: 22px;
@@ -889,7 +904,6 @@ p { color: var(--ink); }
 .form__submit { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding-top: 8px; }
 .form__submit .field__hint { font-size: 0.85rem; }
 
-/* ---------- 9. Offer / generic content blocks ---------- */
 .offer-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -936,7 +950,6 @@ p { color: var(--ink); }
 }
 .offer-block__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
 
-/* About / story */
 .story {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -949,7 +962,10 @@ p { color: var(--ink); }
   overflow: hidden;
   aspect-ratio: 4 / 5;
   position: sticky;
-  top: 100px;
+  top: calc(var(--nav-h) + 16px);
+}
+@media (max-width: 860px) {
+  .story__media { position: static; top: auto; }
 }
 .story__media picture { display: block; width: 100%; height: 100%; }
 .story__media img { width: 100%; height: 100%; object-fit: cover; }
@@ -967,7 +983,6 @@ p { color: var(--ink); }
 .value h4 { margin-bottom: 8px; }
 .value p { color: var(--ink-soft); font-size: 0.97rem; }
 
-/* ---------- 10. FAQ ---------- */
 .faq { display: grid; gap: 0; max-width: 880px; margin: 0 auto; border-top: 1px solid var(--line); }
 .faq__item {
   background: transparent;
@@ -1005,10 +1020,9 @@ p { color: var(--ink); }
   transition: transform var(--t);
   flex-shrink: 0;
 }
-.faq__item[open] .faq__q::after { content: "−"; }
+.faq__item[open] .faq__q::after { content: "-"; }
 .faq__a { padding: 0 24px 28px; color: var(--ink-soft); line-height: 1.7; max-width: 70ch; }
 
-/* ---------- 11. Contact info column ---------- */
 .contact-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -1037,7 +1051,6 @@ p { color: var(--ink); }
 .contact-info__value a { color: #F4EFE6; transition: opacity var(--t); }
 .contact-info__value a:hover { opacity: 0.7; }
 
-/* Contact CTA hero (above form) */
 .contact-cta {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -1051,7 +1064,6 @@ p { color: var(--ink); }
 .contact-cta p { color: var(--ink-soft); font-size: 1.1rem; max-width: 36ch; }
 @media (max-width: 800px) { .contact-cta { grid-template-columns: 1fr; align-items: start; } }
 
-/* ---------- 12. Footer ---------- */
 .footer {
   background: var(--ink);
   color: rgba(244,239,230,0.7);
@@ -1094,9 +1106,6 @@ p { color: var(--ink); }
 }
 .footer__bottom a { color: rgba(244,239,230,0.7); }
 
-/* ---------- 13. Animations ----------
-   .reveal hides content only when JS is enabled (html.js).
-   Without JS, all content stays visible. */
 .js .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -1112,7 +1121,6 @@ p { color: var(--ink); }
 .reveal.delay-3 { transition-delay: 300ms; }
 .reveal.delay-4 { transition-delay: 400ms; }
 
-/* Subtle character reveal for hero h1 (split into lines with <br>) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition: none !important;
@@ -1123,7 +1131,6 @@ p { color: var(--ink); }
   .hero__media { transform: none !important; }
 }
 
-/* ---------- 14. Lightbox ---------- */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1200,14 +1207,12 @@ p { color: var(--ink); }
   .lightbox__btn { width: 44px; height: 44px; }
 }
 
-/* ---------- 15. Misc / utilities ---------- */
 .divider { height: 1px; background: var(--line-soft); border: 0; }
 .text-center { text-align: center; }
 .mt-0 { margin-top: 0; }
 .mt-l { margin-top: 48px; }
 .mt-xl { margin-top: 64px; }
 
-/* Text content blocks (e.g. polityka) */
 .prose { max-width: 720px; }
 .prose h2 { margin-top: 36px; margin-bottom: 12px; font-size: 1.5rem; }
 .prose h3 { margin-top: 24px; margin-bottom: 10px; font-size: 1.2rem; }
@@ -1215,7 +1220,6 @@ p { color: var(--ink); }
 .prose ul { padding-left: 22px; list-style: disc; }
 .prose ul li { margin-bottom: 6px; }
 
-/* ---------- 16. Cookie consent ---------- */
 .cookie {
   position: fixed;
   inset: auto 0 0 0;
