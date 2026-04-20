@@ -211,13 +211,29 @@ p { color: var(--ink); }
 }
 .nav__logo {
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
+  gap: 2px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
-.nav__logo img {
-  height: 36px;
-  width: auto;
+.nav__logo-mark {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.55rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color var(--t);
 }
+.nav__logo-dot {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.55rem;
+  line-height: 1;
+  color: var(--beige);
+  margin-left: 1px;
+}
+.nav__logo:hover .nav__logo-mark { color: var(--espresso); }
 .nav__links {
   display: flex;
   align-items: center;
@@ -725,7 +741,8 @@ p { color: var(--ink); }
 @media (max-width: 900px) { .footer__top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .footer__top { grid-template-columns: 1fr; } }
 .footer__brand { display: flex; flex-direction: column; gap: 16px; }
-.footer__brand img { height: 40px; width: auto; filter: brightness(0) invert(1) opacity(0.95); }
+.footer__brand .nav__logo-mark { color: #F5F0EA; font-size: 1.9rem; }
+.footer__brand .nav__logo-dot  { color: var(--beige); font-size: 1.9rem; }
 .footer__brand p { color: rgba(245,240,234,0.6); font-size: 0.95rem; max-width: 32ch; }
 .footer__col h5 {
   font-family: "Inter", sans-serif;
