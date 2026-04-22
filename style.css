@@ -231,10 +231,6 @@ p { color: var(--ink); }
   border-bottom: 1px solid transparent;
   transition: border-color var(--t), box-shadow var(--t);
 }
-/* Background lives on a pseudo-element so the .nav element itself
-   does not establish a containing block for fixed-positioned children
-   (backdrop-filter on the nav would trap .nav__drawer inside the
-   small header box and make the mobile menu show no background). */
 .nav::before {
   content: "";
   position: absolute;
@@ -276,10 +272,10 @@ p { color: var(--ink); }
   gap: 24px;
 }
 @media (max-width: 920px) {
-  :root { --nav-h: 68px; }
+  :root { --nav-h: 56px; }
 }
 @media (max-width: 480px) {
-  :root { --nav-h: 60px; }
+  :root { --nav-h: 52px; }
 }
 .nav__logo {
   display: inline-flex;
@@ -619,25 +615,7 @@ p { color: var(--ink); }
   letter-spacing: -0.02em;
 }
 .service-tile p {
-  color: rgba(244,239,230,0.78);
-  font-size: 0.95rem;
-  line-height: 1.55;
-  max-width: 38ch;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height var(--t), opacity var(--t), margin var(--t);
-  margin-top: 0;
-}
-.service-tile:hover p,
-.service-tile:focus-visible p {
-  max-height: 8em;
-  opacity: 1;
-  margin-top: 4px;
-}
-@media (hover: none) {
-  .service-tile p { max-height: 8em; opacity: 1; margin-top: 4px; }
-  .service-tile__overlay { background: linear-gradient(180deg, rgba(8,7,6,0.05) 0%, rgba(8,7,6,0.75) 100%); }
+  display: none;
 }
 .service-tile__arrow {
   position: absolute;
@@ -783,6 +761,8 @@ p { color: var(--ink); }
 .tile__caption {
   display: none;
 }
+.tile__caption-eyebrow,
+.tile__caption-title { display: none; }
 
 .realizacje-grid {
   display: grid;
@@ -1157,12 +1137,7 @@ p { color: var(--ink); }
   box-shadow: 0 30px 80px rgba(0,0,0,0.5);
 }
 .lightbox__caption {
-  font-family: var(--font-ui);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(244,239,230,0.7);
-  text-align: center;
+  display: none;
 }
 .lightbox__btn {
   position: absolute;
@@ -1348,4 +1323,44 @@ p { color: var(--ink); }
   .cookie__panel { padding: 18px; gap: 16px; }
   .cookie__actions { justify-content: stretch; }
   .cookie__btn { flex: 1 1 100%; }
+}
+
+@media (max-width: 720px) {
+  h1 { font-size: clamp(2.2rem, 9vw, 3.4rem); line-height: 1.05; }
+  h2 { font-size: clamp(1.7rem, 6.5vw, 2.4rem); line-height: 1.12; }
+  .hero__inner { padding: clamp(96px, 22vw, 160px) 0 clamp(48px, 10vw, 96px); }
+  .hero p { font-size: 1rem; }
+  .hero__cta .btn { flex: 1 1 100%; }
+  .subhero { padding: clamp(96px, 16vw, 160px) 0 clamp(48px, 9vw, 96px); }
+  .section { padding: clamp(56px, 12vw, 96px) 0; }
+  .cta-banner { padding: 32px 24px; gap: 24px; text-align: left; }
+  .cta-banner h2 { max-width: none; }
+  .cta-banner .btn { width: 100%; }
+  .offer-block { gap: 24px; padding: clamp(40px, 9vw, 64px) 0; }
+  .offer-block__cta .btn { flex: 1 1 100%; }
+  .form__submit .btn { width: 100%; }
+  .field input,
+  .field select,
+  .field textarea { font-size: 16px; }
+  .faq__q { padding: 22px 16px; font-size: 1rem; }
+  .faq__a { padding: 0 16px 22px; }
+  .contact-info { padding: 28px 22px; gap: 24px; }
+  .footer { padding-top: 64px; }
+  .footer__top { gap: 36px; padding-bottom: 40px; }
+  .footer__bottom { font-size: 0.8rem; }
+  .nav__drawer { padding-top: 16px; }
+  .nav__drawer .nav__link { padding: 14px 4px; font-size: 1.05rem; }
+  .nav__burger { width: 36px; height: 36px; }
+  .nav__burger span:nth-child(1) { top: 12px; }
+  .nav__burger span:nth-child(2) { top: 17px; }
+  .nav__burger span:nth-child(3) { top: 22px; }
+  .nav.is-open .nav__burger span:nth-child(1),
+  .nav.is-open .nav__burger span:nth-child(3) { top: 17px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 18px; }
+  .nav__logo-mark, .nav__logo-dot { font-size: 1.2rem; }
+  .lightbox { padding: 12px; }
+  .lightbox__close { width: 40px; height: 40px; top: 12px; right: 12px; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
