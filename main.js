@@ -98,8 +98,7 @@ document.documentElement.classList.add('js');
       const innerImg = el.querySelector('img');
       return {
         src: (innerImg && (innerImg.currentSrc || innerImg.src)) || '',
-        alt: el.getAttribute('data-alt') || (innerImg && innerImg.alt) || '',
-        caption: el.getAttribute('data-caption') || ''
+        alt: el.getAttribute('data-alt') || (innerImg && innerImg.alt) || ''
       };
     });
 
@@ -114,13 +113,11 @@ document.documentElement.classList.add('js');
       <button type="button" class="lightbox__btn lightbox__next" aria-label="Następne zdjęcie">&gt;</button>
       <div class="lightbox__stage">
         <img class="lightbox__img" alt="" />
-        <span class="lightbox__caption"></span>
       </div>
     `;
     document.body.appendChild(lb);
 
     const imgEl = lb.querySelector('.lightbox__img');
-    const capEl = lb.querySelector('.lightbox__caption');
     let idx = 0;
     let lastFocus = null;
 
@@ -128,7 +125,6 @@ document.documentElement.classList.add('js');
       const it = items[idx];
       imgEl.src = it.src;
       imgEl.alt = it.alt;
-      capEl.textContent = it.caption || ('Realizacja ' + (idx + 1) + ' / ' + items.length);
     };
     const open = (i, originEl) => {
       idx = i;
