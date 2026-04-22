@@ -761,8 +761,6 @@ p { color: var(--ink); }
 .tile__caption {
   display: none;
 }
-.tile__caption-eyebrow,
-.tile__caption-title { display: none; }
 
 .realizacje-grid {
   display: grid;
