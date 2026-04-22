@@ -60,6 +60,35 @@ document.documentElement.classList.add('js');
   const targets = document.querySelectorAll('.reveal');
   const showAll = () => targets.forEach(el => el.classList.add('is-in'));
 
+  // Synchronise gallery tiles: wait until every image inside a gallery grid is
+  // loaded, then reveal all tiles together (and strip per-tile delays) so the
+  // photos appear at the same time and smoothly.
+  const galleryGrids = document.querySelectorAll('.realizacje-grid');
+  galleryGrids.forEach(grid => {
+    const tiles = Array.from(grid.querySelectorAll('.tile'));
+    if (!tiles.length) return;
+    const imgs = Array.from(grid.querySelectorAll('img'));
+    if (!imgs.length) return;
+    tiles.forEach(t => t.classList.remove('delay-1', 'delay-2', 'delay-3', 'delay-4'));
+    let remaining = imgs.length;
+    let revealed = false;
+    const reveal = () => {
+      if (revealed) return;
+      revealed = true;
+      clearTimeout(fallback);
+      tiles.forEach(t => t.classList.add('is-in'));
+    };
+    const done = () => { if (--remaining <= 0) reveal(); };
+    // Safety fallback so tiles never stay hidden if something stalls.
+    const fallback = setTimeout(reveal, 4000);
+    imgs.forEach(img => {
+      if (img.complete && img.naturalWidth > 0) { done(); return; }
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+    });
+  });
+  const isInGallery = (el) => !!el.closest('.realizacje-grid');
+
   if (reduce || !('IntersectionObserver' in window)) {
     showAll();
   } else {
@@ -71,7 +100,10 @@ document.documentElement.classList.add('js');
         }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    targets.forEach(el => io.observe(el));
+    targets.forEach(el => {
+      if (isInGallery(el)) return; // handled by the gallery sync above
+      io.observe(el);
+    });
     setTimeout(showAll, 1500);
   }
 
