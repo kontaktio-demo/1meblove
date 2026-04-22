@@ -71,17 +71,21 @@ document.documentElement.classList.add('js');
     if (!imgs.length) return;
     tiles.forEach(t => t.classList.remove('delay-1', 'delay-2', 'delay-3', 'delay-4'));
     let remaining = imgs.length;
-    const done = () => {
-      if (--remaining > 0) return;
+    let revealed = false;
+    const reveal = () => {
+      if (revealed) return;
+      revealed = true;
+      clearTimeout(fallback);
       tiles.forEach(t => t.classList.add('is-in'));
     };
+    const done = () => { if (--remaining <= 0) reveal(); };
+    // Safety fallback so tiles never stay hidden if something stalls.
+    const fallback = setTimeout(reveal, 4000);
     imgs.forEach(img => {
       if (img.complete && img.naturalWidth > 0) { done(); return; }
       img.addEventListener('load', done, { once: true });
       img.addEventListener('error', done, { once: true });
     });
-    // Safety fallback so tiles never stay hidden if something stalls.
-    setTimeout(() => tiles.forEach(t => t.classList.add('is-in')), 4000);
   });
   const isInGallery = (el) => !!el.closest('.realizacje-grid');
 
