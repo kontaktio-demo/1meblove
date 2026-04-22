@@ -227,20 +227,38 @@ p { color: var(--ink); }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(244,241,236,0.72);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t), box-shadow var(--t);
+}
+/* Background lives on a pseudo-element so the .nav element itself
+   does not establish a containing block for fixed-positioned children
+   (backdrop-filter on the nav would trap .nav__drawer inside the
+   small header box and make the mobile menu show no background). */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(244,241,236,0.85);
   backdrop-filter: saturate(140%) blur(16px);
   -webkit-backdrop-filter: saturate(140%) blur(16px);
-  border-bottom: 1px solid transparent;
-  transition: background var(--t), border-color var(--t), box-shadow var(--t);
+  transition: background var(--t), opacity var(--t);
 }
 .nav.is-scrolled {
-  background: rgba(244,241,236,0.94);
   border-bottom-color: var(--line-soft);
+}
+.nav.is-scrolled::before {
+  background: rgba(244,241,236,0.96);
 }
 
 .has-hero .nav:not(.is-scrolled) {
-  background: transparent;
   border-bottom-color: transparent;
+}
+.has-hero .nav:not(.is-scrolled)::before {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .has-hero .nav:not(.is-scrolled) .nav__logo-mark,
 .has-hero .nav:not(.is-scrolled) .nav__logo-dot,
@@ -342,22 +360,35 @@ p { color: var(--ink); }
 
 .nav__drawer {
   position: fixed;
-  inset: var(--nav-h) 0 0 0;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - var(--nav-h));
+  height: calc(100dvh - var(--nav-h));
   background: var(--bg);
-  padding: 28px 24px calc(28px + env(safe-area-inset-bottom, 0px));
+  padding: 24px clamp(20px, 5vw, 32px) calc(32px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 4px;
   z-index: 49;
   overflow-y: auto;
+  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
   transition: opacity var(--t), transform var(--t), visibility 0s linear var(--t);
 }
-.nav__drawer .nav__link { padding: 14px 16px; font-size: 1.15rem; color: var(--ink); }
-.nav__drawer .btn { margin-top: 16px; align-self: flex-start; }
+.nav__drawer .nav__link {
+  padding: 18px 4px;
+  font-size: 1.1rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0;
+}
+.nav__drawer .nav__link:hover { background: transparent; opacity: 0.7; }
+.nav__drawer .btn { margin-top: 24px; align-self: stretch; text-align: center; }
 .nav.is-open .nav__drawer {
   opacity: 1;
   visibility: visible;
@@ -365,13 +396,18 @@ p { color: var(--ink); }
   transition: opacity var(--t), transform var(--t), visibility 0s;
 }
 .nav.is-open {
+  border-bottom-color: var(--line-soft);
+}
+.nav.is-open::before {
+  background: var(--bg);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  background: rgba(244,241,236,0.94);
 }
 .has-hero .nav:not(.is-scrolled).is-open {
-  background: rgba(244,241,236,0.94);
   border-bottom-color: var(--line-soft);
+}
+.has-hero .nav:not(.is-scrolled).is-open::before {
+  background: var(--bg);
 }
 .has-hero .nav:not(.is-scrolled).is-open .nav__logo-mark,
 .has-hero .nav:not(.is-scrolled).is-open .nav__logo-dot { color: var(--ink); }
@@ -745,48 +781,7 @@ p { color: var(--ink); }
 .tile:hover .tile__media img,
 .tile:focus-visible .tile__media img { transform: scale(1.05); }
 .tile__caption {
-  position: absolute;
-  left: clamp(18px, 2vw, 28px);
-  bottom: clamp(18px, 2vw, 28px);
-  right: clamp(18px, 2vw, 28px);
-  z-index: 2;
-  color: #F4EFE6;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity var(--t), transform var(--t);
-}
-.tile::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, rgba(8,7,6,0) 50%, rgba(8,7,6,0.65) 100%);
-  opacity: 0;
-  transition: opacity var(--t);
-}
-.tile:hover::after,
-.tile:focus-visible::after { opacity: 1; }
-.tile:hover .tile__caption,
-.tile:focus-visible .tile__caption { opacity: 1; transform: translateY(0); }
-@media (hover: none) {
-  .tile::after { opacity: 1; }
-  .tile__caption { opacity: 1; transform: translateY(0); }
-}
-.tile__caption-eyebrow {
-  font-family: var(--font-ui);
-  font-size: 0.7rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgba(244,239,230,0.8);
-}
-.tile__caption-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
-  letter-spacing: -0.02em;
-  color: #F7F2EC;
+  display: none;
 }
 
 .realizacje-grid {
