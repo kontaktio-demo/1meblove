@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /polityka-prywatnosci.html
+Disallow: /regulamin.html
+
+Sitemap: https://meblove.pl/sitemap.xml

@@ -3,6 +3,39 @@ document.documentElement.classList.add('js');
 (() => {
   'use strict';
 
+  const isLocal = /^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])$/i.test(location.hostname);
+
+  if (!isLocal) {
+    try {
+      const noop = function () {};
+      if (window.console) {
+        const banner = '%cMeblove\n%cTen obszar przeznaczony jest dla deweloperów. Jeżeli ktoś polecił Ci tu cokolwiek wkleić, najprawdopodobniej jest to próba oszustwa.';
+        try { (console.info || console.log || noop).call(console, banner, 'font:600 18px sans-serif;color:#0E0E0D', 'font:13px sans-serif;color:#6F6A63'); } catch (_) {}
+        const methods = ['log', 'info', 'debug', 'warn', 'error', 'table', 'trace', 'dir', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog', 'count', 'countReset', 'assert', 'profile', 'profileEnd'];
+        methods.forEach(m => { try { window.console[m] = noop; } catch (_) {} });
+      }
+    } catch (_) {}
+
+    document.addEventListener('contextmenu', (e) => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const k = (e.key || '').toLowerCase();
+      if (k === 'f12') { e.preventDefault(); return; }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); return; }
+      if ((e.ctrlKey || e.metaKey) && k === 'u') { e.preventDefault(); return; }
+      if ((e.ctrlKey || e.metaKey) && k === 's') { e.preventDefault(); return; }
+    });
+
+    document.addEventListener('dragstart', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'IMG') e.preventDefault();
+    });
+  }
+
   const setNavHeight = () => {
     const n = document.querySelector('.nav');
     if (!n) return;
@@ -60,9 +93,6 @@ document.documentElement.classList.add('js');
   const targets = document.querySelectorAll('.reveal');
   const showAll = () => targets.forEach(el => el.classList.add('is-in'));
 
-  // Synchronise gallery tiles: wait until every image inside a gallery grid is
-  // loaded, then reveal all tiles together (and strip per-tile delays) so the
-  // photos appear at the same time and smoothly.
   const galleryGrids = document.querySelectorAll('.realizacje-grid');
   galleryGrids.forEach(grid => {
     const tiles = Array.from(grid.querySelectorAll('.tile'));
@@ -79,7 +109,6 @@ document.documentElement.classList.add('js');
       tiles.forEach(t => t.classList.add('is-in'));
     };
     const done = () => { if (--remaining <= 0) reveal(); };
-    // Safety fallback so tiles never stay hidden if something stalls.
     const fallback = setTimeout(reveal, 4000);
     imgs.forEach(img => {
       if (img.complete && img.naturalWidth > 0) { done(); return; }
@@ -101,7 +130,7 @@ document.documentElement.classList.add('js');
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(el => {
-      if (isInGallery(el)) return; // handled by the gallery sync above
+      if (isInGallery(el)) return;
       io.observe(el);
     });
     setTimeout(showAll, 1500);

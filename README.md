@@ -1,27 +1,27 @@
-# Meblove — meble na wymiar · Łódź
+# Meblove - meble na wymiar · Łódź
 
 Statyczna strona wizerunkowa małej, rodzinnej pracowni **Meblove** z Łodzi.
-Bez frameworków, bez bundlera — czysty HTML, CSS i JavaScript.
+Bez frameworków, bez bundlera - czysty HTML, CSS i JavaScript.
 
 ```
-├── index.html                  — strona główna (hero + liczby + realizacje)
-├── nasze-meble.html            — katalog mebli z filtrami i materiałami
-├── realizacje.html             — portfolio
-├── o-nas.html                  — o pracowni, wartości
-├── kontakt.html                — dane, formularz, mapa, FAQ
-├── polityka-prywatnosci.html   — polityka prywatności (RODO)
-├── regulamin.html              — regulamin serwisu
-├── style.css                   — pełny design system
-├── main.js                     — nawigacja, animacje, cookies, galeria zdjęć
+├── index.html                  - strona główna (hero + liczby + realizacje)
+├── nasze-meble.html            - katalog mebli z filtrami i materiałami
+├── realizacje.html             - portfolio
+├── o-nas.html                  - o pracowni, wartości
+├── kontakt.html                - dane, formularz, mapa, FAQ
+├── polityka-prywatnosci.html   - polityka prywatności (RODO)
+├── regulamin.html              - regulamin serwisu
+├── style.css                   - pełny design system
+├── main.js                     - nawigacja, animacje, cookies, galeria zdjęć
 ├── assets/
-│   ├── logo.svg                — logo Meblove.com.pl (napisowe)
-│   └── favicon.svg             — favicon
-└── vercel.json                 — konfiguracja Vercel (nagłówki, cache)
+│   ├── logo.svg                - logo Meblove.com.pl (napisowe)
+│   └── favicon.svg             - favicon
+└── vercel.json                 - konfiguracja Vercel (nagłówki, cache)
 ```
 
 ## Uruchomienie lokalnie
 
-Strona jest w pełni statyczna — wystarczy otworzyć `index.html`
+Strona jest w pełni statyczna - wystarczy otworzyć `index.html`
 w przeglądarce lub wystawić lokalny serwer:
 
 ```bash
@@ -32,7 +32,7 @@ Otwórz <http://localhost:5173>.
 
 ## Wdrożenie na Vercel
 
-### Opcja A — przez GUI (najprostsza)
+### Opcja A - przez GUI (najprostsza)
 1. Zaloguj się na <https://vercel.com> i kliknij **Add New → Project**.
 2. Zaimportuj to repozytorium.
 3. W kroku *Configure Project*:
@@ -40,9 +40,9 @@ Otwórz <http://localhost:5173>.
    - **Root Directory:** `.` *(katalog główny repozytorium)*
    - **Build Command:** *(pozostaw puste)*
    - **Output Directory:** *(pozostaw puste)*
-4. Kliknij **Deploy**. Gotowe — po chwili zobaczysz publiczny URL.
+4. Kliknij **Deploy**. Gotowe - po chwili zobaczysz publiczny URL.
 
-### Opcja B — z linii poleceń
+### Opcja B - z linii poleceń
 
 ```bash
 npm i -g vercel
@@ -50,11 +50,11 @@ vercel           # pierwsza konfiguracja (link / create)
 vercel --prod    # wdrożenie produkcyjne
 ```
 
-`vercel.json` w katalogu głównym repozytorium konfiguruje nagłówki bezpieczeństwa i cache — Vercel odczyta go automatycznie.
+`vercel.json` w katalogu głównym repozytorium konfiguruje nagłówki bezpieczeństwa i cache - Vercel odczyta go automatycznie.
 
 ## Co zawiera strona
 
-- **Rebranding:** Meblove — meble na wymiar, mała firma z Łodzi, ul. Piotrkowska 137.
+- **Rebranding:** Meblove - meble na wymiar, mała firma z Łodzi, ul. Piotrkowska 137.
 - **Logo:** lokalny SVG (`assets/logo.svg`) w nawigacji i stopce, favicon.
 - **Zdjęcia:** tłem dla kafli są obrazy z Unsplash, mapowane przez `main.js` na podstawie kolorystyki sekcji (fallback: oryginalne gradienty).
 - **Animacje:** scroll-progress bar, fade-up w obserwatorze, hero reveal z rozmyciem, parallax (opt-in), licznik statystyk, micro-interakcje na kartach i portfolio.
