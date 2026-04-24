@@ -896,6 +896,7 @@ p { color: var(--ink); }
   cursor: pointer;
 }
 .field label.consent input[type="checkbox"] {
+  width: auto;
   margin-top: 3px;
   flex: 0 0 auto;
 }
