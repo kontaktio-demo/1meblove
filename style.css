@@ -29,7 +29,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   --radius-lg:   6px;
 
   --maxw:        1320px;
-  --nav-h:       86px;
+  --nav-h:       64px;
 
   
   --space-3:    8px;
@@ -272,10 +272,10 @@ p { color: var(--ink); }
   gap: 24px;
 }
 @media (max-width: 920px) {
-  :root { --nav-h: 56px; }
+  :root { --nav-h: 52px; }
 }
 @media (max-width: 480px) {
-  :root { --nav-h: 52px; }
+  :root { --nav-h: 48px; }
 }
 .nav__logo {
   display: inline-flex;
