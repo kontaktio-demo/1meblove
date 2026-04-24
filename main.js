@@ -93,9 +93,9 @@ document.documentElement.classList.add('js');
   const targets = document.querySelectorAll('.reveal');
   const showAll = () => targets.forEach(el => el.classList.add('is-in'));
 
-  const galleryGrids = document.querySelectorAll('.realizacje-grid');
+  const galleryGrids = document.querySelectorAll('.realizacje-grid, [data-img-sync]');
   galleryGrids.forEach(grid => {
-    const tiles = Array.from(grid.querySelectorAll('.tile'));
+    const tiles = Array.from(grid.querySelectorAll('.tile, .service-tile'));
     if (!tiles.length) return;
     const imgs = Array.from(grid.querySelectorAll('img'));
     if (!imgs.length) return;
@@ -116,7 +116,7 @@ document.documentElement.classList.add('js');
       img.addEventListener('error', done, { once: true });
     });
   });
-  const isInGallery = (el) => !!el.closest('.realizacje-grid');
+  const isInGallery = (el) => !!el.closest('.realizacje-grid, [data-img-sync]');
 
   if (reduce || !('IntersectionObserver' in window)) {
     showAll();
